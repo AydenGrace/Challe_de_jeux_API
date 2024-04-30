@@ -12,13 +12,13 @@ router.get("/", (req, res) => {
   Cats.find()
     .then((cats) => {
       //Chats récupérés
-      Pedrigree.find((p) => p._id === cats.pedigree)
+      Pedrigree.find({ _id: cats.pedigree })
         .then((p) => {
           cats.pedigree = p.content;
         })
         .catch((e) => {
           console.error(e);
-          res.status(500).send("Get Error");
+          res.status(500).send("Pedigree Error");
         });
       res.status(200).json(cats);
     })
