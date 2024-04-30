@@ -1,0 +1,330 @@
+{
+  "cat_personalities": [
+    {
+      "content": "Calme"
+    },
+    {
+      "content": "Câlin"
+    },
+    {
+      "content": "Joueur"
+    },
+    {
+      "content": "Destructeur"
+    },
+    {
+      "content": "Gourmand"
+    },
+    {
+      "content": "Timide"
+    },
+    {
+      "content": "Craintif"
+    },
+    {
+      "content": "Actif"
+    },
+    {
+      "content": "Ronronnant"
+    },
+    {
+      "content": "Nocturne"
+    }
+  ],
+  "cat_coats": [
+    {
+      "content": "Écaille de tortue"
+    },
+    {
+      "content": "Blanc"
+    },
+    {
+      "content": "Noir"
+    },
+    {
+      "content": "Roux"
+    },
+    {
+      "content": "Chocolat"
+    },
+    {
+      "content": "Bleu"
+    },
+    {
+      "content": "Lilas"
+    },
+    {
+      "content": "Cannelle"
+    },
+    {
+      "content": "Fauve"
+    },
+    {
+      "content": "Crème"
+    }
+  ],
+  "cat_compatibilities": [
+    {
+      "content": "Chien"
+    },
+    {
+      "content": "Chat"
+    },
+    {
+      "content": "Enfant"
+    },
+    {
+      "content": "Autre"
+    }
+  ],
+  "cat_diseases": [
+    {
+      "content": "FIV"
+    },
+    {
+      "content": "Leucose"
+    },
+    {
+      "content": "Coryza"
+    },
+    {
+      "content": "PIF"
+    },
+    {
+      "content": "Typhus"
+    }
+  ],
+  "cat_pedigree": [
+    {
+      "content": "European Shorthait"
+    },
+    {
+      "content": "European Longhair"
+    },
+    {
+      "content": "Siamois"
+    },
+    {
+      "content": "British Shorthair"
+    },
+    {
+      "content": "Maine Coon"
+    },
+    {
+      "content": "Persan"
+    },
+    {
+      "content": "Ragdoll"
+    },
+    {
+      "content": "Sphynx"
+    },
+    {
+      "content": "Abyssin"
+    },
+    {
+      "content": "American Shorthair"
+    },
+    {
+      "content": "Exotic Shorthair"
+    },
+    {
+      "content": "Burmese"
+    },
+    {
+      "content": "Sacré de Birmanie"
+    },
+    {
+      "content": "Scottish Fold"
+    },
+    {
+      "content": "Bombay"
+    },
+    {
+      "content": "Sibérien"
+    },
+    {
+      "content": "Norvégien"
+    },
+    {
+      "content": "Devon Rex"
+    },
+    {
+      "content": "Bleu Russe"
+    },
+    {
+      "content": "Munchkin"
+    },
+    {
+      "content": "American Curl"
+    },
+    {
+      "content": "Bobtail Américain"
+    },
+    {
+      "content": "Balinais"
+    },
+    {
+      "content": "Oriental Shorthair"
+    },
+    {
+      "content": "Chartreux"
+    },
+    {
+      "content": "Bobtail Japonais"
+    },
+    {
+      "content": "Angora Turc"
+    },
+    {
+      "content": "Manx"
+    },
+    {
+      "content": "American Wirehair"
+    },
+    {
+      "content": "Ragamuffin"
+    },
+    {
+      "content": "Mau Égyptien"
+    },
+    {
+      "content": "Himalayen"
+    },
+    {
+      "content": "Somali"
+    },
+    {
+      "content": "Cornish Rex"
+    },
+    {
+      "content": "Korat"
+    },
+    {
+      "content": "Singapura"
+    },
+    {
+      "content": "Ocicat"
+    },
+    {
+      "content": "Tonkinois"
+    },
+    {
+      "content": "Selkirk Rex"
+    },
+    {
+      "content": "Turc de Van"
+    },
+    {
+      "content": "British Longhair"
+    },
+    {
+      "content": "Havana Brown"
+    },
+    {
+      "content": "LaPerm"
+    },
+    {
+      "content": "Chausie"
+    },
+    {
+      "content": "Burmilla"
+    },
+    {
+      "content": "Toyger"
+    },
+    {
+      "content": "Colorpoint Shorthair"
+    },
+    {
+      "content": "Sokoké"
+    },
+    {
+      "content": "Javanais"
+    },
+    {
+      "content": "Snowshoe"
+    },
+    {
+      "content": "Australian Mist"
+    },
+    {
+      "content": "Lykoi"
+    },
+    {
+      "content": "Khao Manee"
+    }
+  ],
+  "cats": [
+    {
+      "name": "Mila",
+      "overview": "C’est la reine de notre salon ! Sa prestance est à l’image de sa beauté ! Relativement calme, elle devient une véritable chasseuse lorsqu’elle voit une ombre !",
+      "born_date": "2014-01-01",
+      "img": "./img/cats/Mila-min.webp",
+      "arrival_date": "2020-07-29",
+      "death_date": null,
+      "adopted_date": null,
+      "pedigree": "Européen",
+      "coat": "Écaille de tortue",
+      "disease": ["FIV"],
+      "compatible": ["Chats", "Enfants"],
+      "personality": ["Calme", "Câlin", "Active la nuit"]
+    },
+    {
+      "name": "Blanco",
+      "overview": "La boule de poil la plus adorable que j’ai pu voir de ma vie. Son amour est aussi grand que sa timidité. Ne le brusquez pas et il vous inondera de câlins !",
+      "born_date": "2016-01-01",
+      "img": "./img/cats/Blanco-min.webp",
+      "arrival_date": "2020-07-29",
+      "death_date": "2020-06-07",
+      "adopted_date": null,
+      "pedigree": "Européen",
+      "robe": "Blanc",
+      "disease": ["FIV"],
+      "compatible": ["Chats", "Enfants"],
+      "personality": ["Calme", "Câlin", "Craintif", "Gourmand"]
+    },
+    {
+      "name": "Skratch",
+      "overview": "Ce gros pépère de 10 ans saura réchauffer vos cuisses durant vos périodes de repos dans le salon de thé ! Extrêmement câlin, véritable moteur à ronrons, il saura faire fondre vos coeurs.",
+      "born_date": "2018-01-01",
+      "img": "./img/cats/Skratch-min.webp",
+      "arrival_date": "2021-03-10",
+      "death_date": null,
+      "adopted_date": null,
+      "pedigree": "Européen",
+      "robe": "Roux",
+      "disease": ["FIV"],
+      "compatible": ["Chats", "Enfants"],
+      "personality": ["Calme", "Câlin", "Ronronnant"]
+    },
+    {
+      "name": "Tiamo",
+      "overview": "Ce jeune Maincoon est un grand joueur ! Attention à vous, il risquerait de sauter sur votre siège pour vous piquer votre chocolat chaud !",
+      "born_date": "2022-06-01",
+      "img": "./img/cats/Tiamo-min.webp",
+      "arrival_date": "2020-08-22",
+      "death_date": null,
+      "adopted_date": null,
+      "pedigree": "Mainecoon",
+      "robe": "Tigré",
+      "disease": [],
+      "compatible": ["Chats", "Enfants", "Chiens"],
+      "personality": ["Joueur", "Câlin", "Gourmand"]
+    },
+    {
+      "name": "Nymeria",
+      "overview": "Cette magnifique chatte saura ravivez votre flamme à coup de câlins !",
+      "born_date": "2022-06-01",
+      "img": "./img/cats/Nymeria-min.webp",
+      "arrival_date": "2020-08-22",
+      "death_date": null,
+      "adopted_date": null,
+      "pedigree": "Mainecoon",
+      "robe": "Bleu",
+      "disease": [],
+      "compatible": ["Chats", "Enfants", "Chiens"],
+      "personality": ["Joueur", "Câlin", "Gourmand"]
+    }
+  ]
+}
