@@ -6,7 +6,7 @@ const schema = require("mongoose").Schema;
 const pedigreeSchema = schema({
   content: String,
 });
-const Pedrigree = mongoose.model("cat-pedigree", pedigreeSchema);
+const Pedrigree = mongoose.model("cat_pedigree", pedigreeSchema);
 
 router.get("/", (req, res) => {
   Cats.find()
