@@ -2,11 +2,11 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 const catSchema = require("./../../models/cats.schema");
 const Cats = mongoose.model("cats", catSchema);
-const schema = require("mongoose").Schema;
-const pedigreeSchema = schema({
-  content: String,
-});
-const Pedrigree = mongoose.model("cat_pedigree", pedigreeSchema);
+// const schema = require("mongoose").Schema;
+// const pedigreeSchema = schema({
+//   content: String,
+// });
+// const Pedrigree = mongoose.model("cat_pedigree", pedigreeSchema);
 
 router.get("/", (req, res) => {
   Cats.find()
