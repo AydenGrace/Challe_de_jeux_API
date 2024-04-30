@@ -2,10 +2,26 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 const catSchema = require("./../../models/cats.schema");
 const Cats = mongoose.model("cats", catSchema);
+const schema = require("mongoose").Schema;
+const pedigreeSchema = schema({
+  content: String,
+});
+const Pedrigree = mongoose.model("cat-pedigree", pedigreeSchema);
 
 router.get("/", (req, res) => {
   Cats.find()
-    .then((data) => res.status(200).json(data))
+    .then((cats) => {
+      //Chats récupérés
+      Pedrigree.find((p) => p._id === cats.pedigree)
+        .then((p) => {
+          cats.pedigree = p.content;
+        })
+        .catch((e) => {
+          console.error(e);
+          res.status(500).send("Get Error");
+        });
+      res.status(200).json(cats);
+    })
     .catch((e) => {
       console.error(e);
       res.status(500).send("Get Error");
