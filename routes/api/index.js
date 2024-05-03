@@ -16,6 +16,11 @@ const Apis = [
     url: "/users",
     name: "Users",
   },
+  {
+    require: require("./contact"),
+    url: "/contact",
+    name: "Contact",
+  },
 ];
 
 Apis.map((item) => {
