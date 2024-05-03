@@ -10,11 +10,24 @@ router.get("/", (req, res) => {
 
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
+  let stop = false;
   const users = new User({
     username,
     email,
     password: await bcrypt.hash(password, 12),
   });
+
+  await User.findOne({ email: email })
+    .then((t) => {
+      res.status(400).json({ message: "Email déjà utilisé" });
+      stop = true;
+    })
+    .catch((err) =>
+      res.json({ message: "Une erreur est survenue", error: err })
+    );
+
+  if (stop) return;
+
   users
     .save()
     .then((t) => res.status(200).json(t))
