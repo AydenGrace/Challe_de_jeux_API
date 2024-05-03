@@ -19,7 +19,7 @@ router.post("/register", async (req, res) => {
 
   await User.findOne({ email: email })
     .then((t) => {
-      res.status(201).json({ status: 300, message: "Email déjà utilisé" });
+      res.json({ status: 300, message: "Email déjà utilisé", data: t });
       stop = true;
     })
     .catch((err) =>
