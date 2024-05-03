@@ -38,8 +38,28 @@ router.post("/register", async (req, res) => {
     );
 });
 
-router.post("/login", (req, res) => {
-  res.send("Users");
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = new User({
+    email,
+    password: await bcrypt.hash(password, 12),
+  });
+
+  user
+    .find({ email: email, password: password })
+    .then((data) => {
+      if (data !== null) {
+        res.json({ status: 200, user: data });
+      } else {
+        res.json({
+          status: 300,
+          user: "Combinaison Email/mot de passe incorrect",
+        });
+      }
+    })
+    .catch((err) =>
+      res.json({ status: 400, message: "Une erreur est survenue", error: err })
+    );
 });
 
 module.exports = router;
