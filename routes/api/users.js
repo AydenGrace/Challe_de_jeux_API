@@ -19,20 +19,20 @@ router.post("/register", async (req, res) => {
 
   await User.findOne({ email: email })
     .then((t) => {
-      res.json({ message: "Email déjà utilisé" });
+      res.status(201).json({ status: 400, message: "Email déjà utilisé" });
       stop = true;
     })
     .catch((err) =>
-      res.json({ message: "Une erreur est survenue", error: err })
+      res.json({ status: 400, message: "Une erreur est survenue", error: err })
     );
 
   if (stop) return;
 
   users
     .save()
-    .then((t) => res.status(200).json(t))
+    .then((t) => res.status(200).json({ status: 200, user: t }))
     .catch((err) =>
-      res.json({ message: "Une erreur est survenue", error: err })
+      res.json({ status: 400, message: "Une erreur est survenue", error: err })
     );
 });
 
