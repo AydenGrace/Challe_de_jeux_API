@@ -40,15 +40,16 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  const user = new User({
-    email,
-    password: await bcrypt.hash(password, 12),
-  });
 
-  user
-    .find({ email: email, password: password })
-    .then((data) => {
-      if (data !== null) {
+  User.findOne({ email: email }).then((data) => {
+    console.log(data);
+    const comp = bcrypt.compare(password, data.password, (err, result) => {
+      if (err) console.log(err);
+
+      console.log(result);
+
+      if (result) {
+        data.password = "";
         res.json({ status: 200, user: data });
       } else {
         res.json({
@@ -56,10 +57,8 @@ router.post("/login", async (req, res) => {
           user: "Combinaison Email/mot de passe incorrect",
         });
       }
-    })
-    .catch((err) =>
-      res.json({ status: 400, message: "Une erreur est survenue", error: err })
-    );
+    });
+  });
 });
 
 module.exports = router;
