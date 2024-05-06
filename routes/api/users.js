@@ -54,7 +54,7 @@ router.post("/login", async (req, res) => {
       } else {
         res.json({
           status: 300,
-          user: "Combinaison Email/mot de passe incorrect",
+          message: "Combinaison Email/mot de passe incorrect",
         });
       }
     });
