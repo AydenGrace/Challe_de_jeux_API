@@ -4,12 +4,12 @@ const PORT = process.env.PORT || 5000;
 const mongoose = require("mongoose");
 const config = require("./database/config");
 const cors = require("cors");
-// const allowedOrigin = "https://challe-de-jeux-frontend.vercel.app";
+const allowedOrigin = "https://challe-de-jeux-frontend.vercel.app";
 
 app.use(express.json());
 app.use((req, res, next) => {
   // res.header("Access-Control-Allow-Origin", process.env.BASE_URL);
-  res.header("Access-Control-Allow-Origin", "https://challe-de-jeux-frontend.vercel.app");
+  res.header("Access-Control-Allow-Origin", allowedOrigin);
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Credentials", "true");
