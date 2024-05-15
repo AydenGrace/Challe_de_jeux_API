@@ -47,4 +47,4 @@ const catSchema = schema({
   personalities: [{ type: schema.ObjectId, ref: "Personalities" }],
 });
 
-module.exports = catSchema;
+module.exports = mongoose.model("cats", catSchema);
