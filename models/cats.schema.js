@@ -1,4 +1,5 @@
 const schema = require("mongoose").Schema;
+const mongoose = require("mongoose");
 
 const pedigreeSchema = schema({
   content: String,
@@ -20,14 +21,14 @@ const coatsSchema = schema({
   content: String,
 });
 
-const Pedigree = require("mongoose").model("cat_pedigree", pedigreeSchema);
-const Coat = require("mongoose").model("cat_coat", coatsSchema);
-const Diseases = require("mongoose").model("cat_diseases", diseasesSchema);
-const Compatibilities = require("mongoose").model(
+const Pedigree = mongoose.model("cat_pedigree", pedigreeSchema);
+const Coat = mongoose.model("cat_coat", coatsSchema);
+const Diseases = mongoose.model("cat_diseases", diseasesSchema);
+const Compatibilities = mongoose.model(
   "cat_compatibilities",
   compatibilitiesSchema
 );
-const Personalities = require("mongoose").model(
+const Personalities = mongoose.model(
   "cat_personalities",
   personalitiesSchema
 );
