@@ -6,6 +6,7 @@ const config = require("./database/config");
 const cors = require("cors");
 const allowedOrigin = "https://challe-de-jeux-frontend.vercel.app";
 
+app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
   // res.header("Access-Control-Allow-Origin", process.env.BASE_URL);
