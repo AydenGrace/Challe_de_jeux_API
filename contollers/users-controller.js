@@ -58,11 +58,11 @@ const verifyMail = async (req, res) => {
       //Token encore valide
       await User.findOneAndUpdate({ email: decoded.email }, { token: null });
       await sendValidationAccount(decoded.email);
-      res.json({ message: "Inscription confirmée avec succès", status: 200 });
+      res.json({ message: "Inscription confirmée avec succès.", status: 200 });
     } else {
       await User.findOneAndDelete({ email: decoded.email });
       await sendInvalideToken(decoded.email);
-      res.json({ message: "Token non valide ou expiré", status: 400 });
+      res.json({ message: "Token non valide ou expiré.", status: 400 });
     }
   } catch (error) {
     console.error(error);

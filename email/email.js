@@ -13,7 +13,7 @@ const sendConfirmationEmail = async (email, token) => {
     from: process.env.EMAIL_USER,
     to: email,
     subject: "Confirmation d'inscription",
-    html: `<p>Merci de vous être inscrit ! Cliquez sur le lien suivant pour confirmer l'inscription : <a href="${process.env.API_URL}/api/users/verifyMail/${token}">Confirmer l'inscription</a>.</p>`,
+    html: `<p>Merci de vous être inscrit ! Cliquez sur le lien suivant pour confirmer l'inscription : <a href="${process.env.BASE_URL}/verify_mail/${token}">Confirmer l'inscription</a>.</p>`,
   };
 
   await transporter.sendMail(mailOptions);
