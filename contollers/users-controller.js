@@ -20,7 +20,7 @@ const Register = async (req, res) => {
       console.log(token);
       // Encode data before passing it in the URL
       const payload = token;
-      const encodedPayload = token.replace(/\./g, "_");
+      const encodedPayload = token.replace(/\./g, ",");
       console.log(encodedPayload);
       // Now you can use `encodedPayload` in the URL
       await sendConfirmationEmail(email, encodedPayload);
