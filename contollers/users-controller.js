@@ -109,6 +109,7 @@ const Login = async (req, res) => {
 
 const ForgotPwd = async (req, res) => {
   const { email } = req.body;
+  console.log(email);
   try {
     const token = createTokenEmail(email);
     const user = await User.findOneAndUpdate(
@@ -116,6 +117,7 @@ const ForgotPwd = async (req, res) => {
       { password_token: token }
     );
     if (user) {
+      console.log("User found : " + user);
       const encodedPayload = token.replace(/\./g, ",");
       console.log(encodedPayload);
       await sendChangePwd(email, encodedPayload);
