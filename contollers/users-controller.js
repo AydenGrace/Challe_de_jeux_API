@@ -5,6 +5,7 @@ const {
   sendConfirmationEmail,
   sendValidationAccount,
   sendInvalideToken,
+  sendChangePwd,
 } = require("../email/email");
 
 const createTokenEmail = (email) => {
@@ -19,7 +20,6 @@ const Register = async (req, res) => {
       const token = createTokenEmail(email);
       console.log(token);
       // Encode data before passing it in the URL
-      const payload = token;
       const encodedPayload = token.replace(/\./g, ",");
       console.log(encodedPayload);
       // Now you can use `encodedPayload` in the URL
@@ -107,4 +107,32 @@ const Login = async (req, res) => {
   }
 };
 
-module.exports = { Register, verifyMail, Login };
+const ForgotPwd = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const token = createTokenEmail(email);
+    const user = await User.findOneAndUpdate(
+      { email },
+      { password_token: token }
+    );
+    if (user) {
+      const encodedPayload = token.replace(/\./g, ",");
+      console.log(encodedPayload);
+      await sendChangePwd(email, encodedPayload);
+      res.json({
+        message: "Demande enregistrée.",
+        status: 200,
+      });
+    } else {
+      res.json({
+        message: "Aucun compte correspondant.",
+        status: 400,
+      });
+    }
+  } catch (error) {
+    res.json({ error: error.message });
+    console.error(error);
+  }
+};
+
+module.exports = { Register, verifyMail, Login, ForgotPwd };

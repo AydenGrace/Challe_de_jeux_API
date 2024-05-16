@@ -41,8 +41,20 @@ const sendInvalideToken = async (email) => {
   await transporter.sendMail(mailOptions);
 };
 
+const sendChangePwd = async (email, token) => {
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Demande de changement de mot de passe.",
+    html: `<p>Votre demande de changement de mot de passe a bien été reçue. Si cette demande n'est pas de votre initiative, merci d'ignorer le lien suivant : <a href="${process.env.BASE_URL}/change_password/${token}">Modifier mon mot de passe</a>.</p>`,
+  };
+
+  await transporter.sendMail(mailOptions);
+};
+
 module.exports = {
   sendConfirmationEmail,
   sendValidationAccount,
   sendInvalideToken,
+  sendChangePwd,
 };
