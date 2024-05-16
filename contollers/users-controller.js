@@ -21,6 +21,7 @@ const Register = async (req, res) => {
       // Encode data before passing it in the URL
       const payload = token;
       const encodedPayload = encodeURIComponent(payload);
+      console.log(encodedPayload);
       // Now you can use `encodedPayload` in the URL
       await sendConfirmationEmail(email, encodedPayload);
       const salt = await bcrypt.genSalt(10);
