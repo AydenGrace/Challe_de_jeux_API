@@ -18,7 +18,11 @@ const Register = async (req, res) => {
     if (!user) {
       const token = createTokenEmail(email);
       console.log(token);
-      await sendConfirmationEmail(email, token);
+      // Encode data before passing it in the URL
+      const payload = token;
+      const encodedPayload = encodeURIComponent(payload);
+      // Now you can use `encodedPayload` in the URL
+      await sendConfirmationEmail(email, encodedPayload);
       const salt = await bcrypt.genSalt(10);
       const hashpwd = await bcrypt.hash(password, salt);
       const user = new User({
