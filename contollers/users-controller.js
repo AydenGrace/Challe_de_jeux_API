@@ -137,4 +137,32 @@ const ForgotPwd = async (req, res) => {
   }
 };
 
-module.exports = { Register, verifyMail, Login, ForgotPwd };
+const ChangePwd = async (req, res) => {
+  const { token, password } = req.body;
+  try {
+    const user = await User.findOne({ password_token: token });
+    if (user) {
+      const salt = await bcrypt.genSalt(10);
+      const hashpwd = await bcrypt.hash(password, salt);
+      const decoded = jwt.verify(token, process.env.SECRET, {
+        ignoreExpiration: true,
+      });
+      if (decoded.exp * 1000 > new Date().getTime()) {
+        await User.findOneAndUpdate(
+          { password_token: token },
+          { password_token: null, password: hashpwd }
+        );
+        res.json({ status: 200, massage: "Mot de passe modifié avec succès." });
+      } else {
+        res.json({ status: 400, message: "Token expiré." });
+      }
+    } else {
+      res.json({ status: 400, message: "Token invalide." });
+    }
+  } catch (error) {
+    res.json({ error: error.message });
+    console.error(error);
+  }
+};
+
+module.exports = { Register, verifyMail, Login, ForgotPwd, ChangePwd };
