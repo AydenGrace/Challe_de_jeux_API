@@ -8,7 +8,7 @@ const getEmailForm = async (req, res) => {
     email,
     subject,
     content,
-    date,
+    date: new Date(),
   });
   await sendContactForm(newContact);
   await newContact
