@@ -15,9 +15,7 @@ const sendContactForm = async (content) => {
     subject: "Nouveau formulaire de contact : " + content.subject,
     html: `<p>De: ${content.name}<br/>Email : ${
       content.email
-    }<br/>Daté du : ${content.date.toLocaleDateString(
-      "fr-FR"
-    )} à ${content.date.toLocaleString("fr-FR", {
+    }<br/>Daté du : ${content.date.toLocaleString("fr-FR", {
       timeZone: "Europe/Paris",
     })}<br/><br/>${content.content}</p>`,
   };
