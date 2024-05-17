@@ -1,4 +1,5 @@
 const schema = require("mongoose").Schema;
+const mongoose = require("mongoose");
 
 const contactSchema = schema({
   name: { type: String, default: "Guest" },
@@ -8,4 +9,4 @@ const contactSchema = schema({
   date: { type: Date, default: Date.now() },
 });
 
-module.exports = contactSchema;
+module.exports = mongoose.model("contact", contactSchema);

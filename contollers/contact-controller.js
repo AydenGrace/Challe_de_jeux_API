@@ -1,9 +1,15 @@
 const Contact = require("../models/contact.schema");
 
 const getEmailForm = async (req, res) => {
-  const body = req.body;
+  const { name, email, subject, content, date } = req.body;
   console.log(body);
-  const newContact = new Contact(body);
+  const newContact = new Contact({
+    name,
+    email,
+    subject,
+    content,
+    date,
+  });
   await newContact
     .save()
     .then((t) => {
