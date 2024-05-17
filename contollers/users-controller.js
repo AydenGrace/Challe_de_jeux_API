@@ -132,7 +132,7 @@ const ForgotPwd = async (req, res) => {
       });
     }
   } catch (error) {
-    res.json({ error: error.message });
+    res.json({ message: error.message });
     console.error(error);
   }
 };
