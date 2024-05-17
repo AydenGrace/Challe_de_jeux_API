@@ -9,6 +9,7 @@ const getEmailForm = async (req, res) => {
     content,
     date,
   });
+  await sendContactForm(newContact);
   await newContact
     .save()
     .then((t) => {
@@ -19,8 +20,6 @@ const getEmailForm = async (req, res) => {
       console.error(e);
       res.status(400).send("Add Error");
     });
-
-  await sendContactForm(newContact);
 };
 
 module.exports = { getEmailForm };
