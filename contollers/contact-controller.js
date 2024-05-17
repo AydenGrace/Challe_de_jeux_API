@@ -1,3 +1,4 @@
+const { sendContactForm } = require("../email/email");
 const Contact = require("../models/contact.schema");
 
 const getEmailForm = async (req, res) => {
