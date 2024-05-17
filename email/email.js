@@ -17,9 +17,9 @@ const sendContactForm = async (content) => {
       content.email
     }<br/>Daté du : ${content.date.toLocaleDateString(
       "fr-FR"
-    )} à ${content.date.toLocaleTimeString("fr-FR")}<br/><br/>${
-      content.content
-    }</p>`,
+    )} à ${content.date.toLocaleString("fr-FR", {
+      timeZone: "Europe/Paris",
+    })}<br/><br/>${content.content}</p>`,
   };
 
   await transporter.sendMail(mailOptions);
