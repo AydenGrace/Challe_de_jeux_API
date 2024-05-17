@@ -10,10 +10,7 @@ const transporter = nodemailer.createTransport({
 
 const sendContactForm = async (content) => {
   const mailOptions = {
-    headers: {
-      priority: "high",
-    },
-
+    priority: "high",
     from: process.env.EMAIL_USER,
     to: process.env.ADMIN_MAIL,
     subject: "Nouveau formulaire de contact : " + content.subject,
