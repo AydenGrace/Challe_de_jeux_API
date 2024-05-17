@@ -2,7 +2,6 @@ const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
   service: "Gmail",
-  priority: "high",
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -11,7 +10,10 @@ const transporter = nodemailer.createTransport({
 
 const sendContactForm = async (content) => {
   const mailOptions = {
-    priority: "high",
+    headers: {
+      priority: "high",
+    },
+
     from: process.env.EMAIL_USER,
     to: process.env.ADMIN_MAIL,
     subject: "Nouveau formulaire de contact : " + content.subject,
