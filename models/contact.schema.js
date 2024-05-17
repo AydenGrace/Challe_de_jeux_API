@@ -6,7 +6,7 @@ const contactSchema = new mongoose.Schema(
     email: String,
     subject: { type: String, default: "La Challe de Jeux - Contact" },
     content: String,
-    date: { type: Date, default: Date.now() },
+    date: { type: Date, default: new Date() },
   },
   {
     timestamps: true,
