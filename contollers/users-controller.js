@@ -152,7 +152,7 @@ const ChangePwd = async (req, res) => {
           { password_token: token },
           { password_token: null, password: hashpwd }
         );
-        res.json({ status: 200, massage: "Mot de passe modifié avec succès." });
+        res.json({ status: 200, message: "Mot de passe modifié avec succès." });
       } else {
         res.json({ status: 400, message: "Token expiré." });
       }
