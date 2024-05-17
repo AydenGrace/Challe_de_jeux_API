@@ -17,3 +17,5 @@ const getEmailForm = async (req, res) => {
 
   await sendContactForm(newContact);
 };
+
+module.exports = { getEmailForm };
