@@ -13,7 +13,13 @@ const sendContactForm = async (content) => {
     from: process.env.EMAIL_USER,
     to: process.env.ADMIN_MAIL,
     subject: "Nouveau formulaire de contact : " + content.subject,
-    html: `<p>De: ${content.name}<br/>Email : ${content.email}<br/>Daté du : ${content.date}<br/><br/>${content.content}</p>`,
+    html: `<p>De: ${content.name}<br/>Email : ${
+      content.email
+    }<br/>Daté du : ${content.date.datetoLocaleDateString(
+      "fr-FR"
+    )} à ${content.date.toLocaleTimeString("fr-FR")}<br/><br/>${
+      content.content
+    }</p>`,
   };
 
   await transporter.sendMail(mailOptions);
