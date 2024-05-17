@@ -11,9 +11,7 @@ const transporter = nodemailer.createTransport({
 const sendContactForm = async (content) => {
   const mailOptions = {
     headers: {
-      "x-priority": "1",
-      "x-msmail-priority": "High",
-      importance: "high",
+      priority: "high",
     },
     from: process.env.EMAIL_USER,
     to: process.env.ADMIN_MAIL,
