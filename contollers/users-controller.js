@@ -94,7 +94,7 @@ const verifyMail = async (req, res) => {
 const Login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate("role");
     if (user) {
       if (user.token) {
         res.json({
