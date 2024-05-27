@@ -22,16 +22,18 @@ const coatsSchema = schema({
 });
 
 const Pedigree = mongoose.model("cat_pedigree", pedigreeSchema);
+module.exports = mongoose.model("cat_pedigree", pedigreeSchema);
 const Coat = mongoose.model("cat_coat", coatsSchema);
+module.exports = mongoose.model("cat_coat", coatsSchema);
 const Diseases = mongoose.model("cat_diseases", diseasesSchema);
+module.exports = mongoose.model("cat_diseases", diseasesSchema);
 const Compatibilities = mongoose.model(
   "cat_compatibilities",
   compatibilitiesSchema
 );
-const Personalities = mongoose.model(
-  "cat_personalities",
-  personalitiesSchema
-);
+module.exports = mongoose.model("cat_compatibilities", compatibilitiesSchema);
+const Personalities = mongoose.model("cat_personalities", personalitiesSchema);
+module.exports = mongoose.model("cat_personalities", personalitiesSchema);
 
 const catSchema = schema({
   name: String,
