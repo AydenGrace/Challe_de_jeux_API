@@ -12,7 +12,7 @@ const router = require("express").Router();
 const rolesRouter = require("./roles");
 router.use("/roles", rolesRouter);
 
-// router.use("/", getAll);
+router.get("/", getAll);
 
 router.post("/register", Register);
 
