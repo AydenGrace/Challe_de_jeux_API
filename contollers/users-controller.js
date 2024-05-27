@@ -12,6 +12,10 @@ const createTokenEmail = (email) => {
   return jwt.sign({ email }, process.env.SECRET, { expiresIn: "1h" });
 };
 
+const createTokenLogin = (_id) => {
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "30m" });
+};
+
 const getAll = async (req, res) => {
   User.find()
     .populate("role")
@@ -101,7 +105,8 @@ const Login = async (req, res) => {
       }
       const match = await bcrypt.compare(password, user.password);
       if (match) {
-        res.status(200).json({ user, status: 200 });
+        const token = createTokenLogin(user._id);
+        res.status(200).json({ user, token, status: 200 });
       } else {
         res.json({
           message: "Combinaison email/mot de passe incorrect.",
