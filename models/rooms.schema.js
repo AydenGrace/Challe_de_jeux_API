@@ -10,4 +10,4 @@ const roomSchema = schema({
   tags: { type: Array, default: [] },
 });
 
-module.exports = roomSchema;
+module.exports = mongoose.model("rooms", roomSchema);
