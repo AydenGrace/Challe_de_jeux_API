@@ -13,6 +13,7 @@ const getCats = async (req, res) => {
 
 const getFullCats = async (req, res) => {
   Cats.find()
+    .populate("coat")
     .then((cats) => {
       res.status(200).json(cats);
     })
