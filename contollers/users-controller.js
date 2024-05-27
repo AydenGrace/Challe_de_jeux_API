@@ -43,6 +43,7 @@ const Register = async (req, res) => {
         email,
         password: hashpwd,
         token,
+        role: "66546efd8d19f28a9d15593d",
       });
       await user.save();
       res.status(200).json({
