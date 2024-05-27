@@ -12,6 +12,18 @@ const createTokenEmail = (email) => {
   return jwt.sign({ email }, process.env.SECRET, { expiresIn: "1h" });
 };
 
+const getAll = async (req, res) => {
+  User.find()
+    .populate("role")
+    .then((roles) => {
+      res.status(200).json(roles);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.status(500).send("Get Error");
+    });
+};
+
 const Register = async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -165,4 +177,4 @@ const ChangePwd = async (req, res) => {
   }
 };
 
-module.exports = { Register, verifyMail, Login, ForgotPwd, ChangePwd };
+module.exports = { Register, verifyMail, Login, ForgotPwd, ChangePwd, getAll };

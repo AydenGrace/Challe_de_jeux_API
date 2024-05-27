@@ -4,9 +4,15 @@ const {
   verifyMail,
   ForgotPwd,
   ChangePwd,
+  getAll,
 } = require("../../contollers/users-controller");
 
 const router = require("express").Router();
+
+const rolesRouter = require("./roles");
+router.use("/roles", rolesRouter);
+
+router.use("/", getAll);
 
 router.post("/register", Register);
 
