@@ -1,4 +1,9 @@
 const Cats = require("../models/cats.schema");
+const Coat = require("../models/coat.schema");
+const Compatibility = require("../models/compatibilitie.schema");
+const Disease = require("../models/disease.schema");
+const Pedigree = require("../models/pedigree.schema");
+const Personality = require("../models/personalities.schema");
 
 const getCats = async (req, res) => {
   Cats.find()

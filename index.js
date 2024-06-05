@@ -9,7 +9,6 @@ const allowedOrigin = "https://challe-de-jeux-frontend.vercel.app";
 app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
-  // res.header("Access-Control-Allow-Origin", process.env.BASE_URL);
   res.header("Access-Control-Allow-Origin", allowedOrigin);
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH");
   res.header("Access-Control-Allow-Headers", "Content-Type");
