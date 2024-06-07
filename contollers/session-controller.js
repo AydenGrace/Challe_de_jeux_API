@@ -1,4 +1,4 @@
-const Session = require("../models/rooms/sessions.schema");
+const Session = require("../models/reservation/sessions.schema");
 
 const getAll = (req, res) => {
   Session.find()

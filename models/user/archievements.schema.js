@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 
 const archievementSchema = schema({
   content: { type: String, required: true, unique: true },
-  points: Number,
+  points: { type: Number, required: true },
+  img: { type: String },
 });
 
 module.exports = mongoose.model("user_archivements", archievementSchema);

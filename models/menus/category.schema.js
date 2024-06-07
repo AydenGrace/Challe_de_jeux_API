@@ -1,8 +1,9 @@
 const schema = require("mongoose").Schema;
+const { Timestamp } = require("mongodb");
 const mongoose = require("mongoose");
 
-const personalitiesSchema = schema({
+const categorySchema = schema({
   content: { type: String, required: true, unique: true },
 });
 
-module.exports = mongoose.model("cat_personalities", personalitiesSchema);
+module.exports = mongoose.model("menu_categories", categorySchema);
