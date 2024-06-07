@@ -1,9 +1,8 @@
-const Room = require("../models/rooms/rooms.schema");
-const RoomTags = require("../models/rooms/rooms_tag.schema");
+const Session = require("../models/rooms/sessions.schema");
 
-const getAll = async (req, res) => {
-  Room.find()
-    .populate("tags")
+const getAll = (req, res) => {
+  Session.find()
+    .populate("room")
     .then((cats) => {
       res.status(200).json(cats);
     })

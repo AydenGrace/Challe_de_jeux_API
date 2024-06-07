@@ -1,4 +1,4 @@
-const Roles = require("../models/roles.schema");
+const Roles = require("../models/user/roles.schema");
 
 const getAll = async (req, res) => {
   Roles.find()

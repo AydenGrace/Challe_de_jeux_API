@@ -4,6 +4,7 @@ const {
   deleteCat,
   updateCat,
   getFullCats,
+  findCat,
 } = require("../../contollers/cats-controller");
 
 const router = require("express").Router();
@@ -16,5 +17,7 @@ router.post("/add", addCat);
 router.delete("/delete", deleteCat);
 
 router.patch("/update", updateCat);
+
+router.get("/find", findCat);
 
 module.exports = router;

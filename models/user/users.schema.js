@@ -10,6 +10,7 @@ const userSchema = new schema(
     token: String,
     password_token: String,
     role: { type: ObjectId, ref: "roles" },
+    archievements: [{ type: ObjectId, ref: "user_archivements" }],
   },
   {
     timestamps: true,

@@ -1,4 +1,4 @@
-const { getAll } = require("../../contollers/rooms-controller");
+const { getAll } = require("../../contollers/session-controller");
 
 const router = require("express").Router();
 

@@ -1,5 +1,5 @@
 const { sendContactForm } = require("../email/email");
-const Contact = require("../models/contact.schema");
+const Contact = require("../models/communication/contact.schema");
 
 const getEmailForm = async (req, res) => {
   const { name, email, subject, content } = req.body;

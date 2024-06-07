@@ -21,6 +21,11 @@ const Apis = [
     url: "/contact",
     name: "Contact",
   },
+  {
+    require: require("./sessions"),
+    url: "/sessions",
+    name: "Sessions",
+  },
 ];
 
 Apis.map((item) => {

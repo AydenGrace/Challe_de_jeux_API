@@ -1,9 +1,9 @@
-const Cats = require("../models/cats.schema");
-const Coat = require("../models/coat.schema");
-const Compatibility = require("../models/compatibilitie.schema");
-const Disease = require("../models/disease.schema");
-const Pedigree = require("../models/pedigree.schema");
-const Personality = require("../models/personalities.schema");
+const Cats = require("../models/cats/cats.schema");
+const Coat = require("../models/cats/coat.schema");
+const Compatibility = require("../models/cats/compatibilitie.schema");
+const Disease = require("../models/cats/disease.schema");
+const Pedigree = require("../models/cats/pedigree.schema");
+const Personality = require("../models/cats/personalities.schema");
 
 const getCats = async (req, res) => {
   Cats.find()
@@ -18,7 +18,11 @@ const getCats = async (req, res) => {
 
 const getFullCats = async (req, res) => {
   Cats.find()
-    .populate("cat_coat")
+    .populate("pedigree")
+    .populate("coat")
+    .populate("diseases")
+    .populate("compatibilities")
+    .populate("personalities")
     .then((cats) => {
       res.status(200).json(cats);
     })
@@ -54,4 +58,29 @@ const updateCat = async (req, res) => {
   res.send("Chat Modifié");
 };
 
-module.exports = { getCats, addCat, deleteCat, updateCat, getFullCats };
+const findCat = async (req, res) => {
+  console.log(req);
+  const { _id } = req.body;
+  Cats.find({ _id })
+    .populate("pedigree")
+    .populate("coat")
+    .populate("diseases")
+    .populate("compatibilities")
+    .populate("personalities")
+    .then((cats) => {
+      res.status(200).json(cats);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.status(500).send("Get Error");
+    });
+};
+
+module.exports = {
+  getCats,
+  addCat,
+  deleteCat,
+  updateCat,
+  getFullCats,
+  findCat,
+};
