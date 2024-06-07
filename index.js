@@ -5,6 +5,11 @@ const mongoose = require("mongoose");
 const config = require("./database/config");
 const cors = require("cors");
 const allowedOrigin = "https://challe-de-jeux-frontend.vercel.app";
+const { default: BackupToolkit } = require("mongodb-backup-toolkit");
+const cron = require("node-cron");
+let task;
+const maxBackup = 10;
+let current_dumb = 1;
 
 app.use(cors());
 app.use(express.json());
@@ -16,6 +21,15 @@ app.use((req, res, next) => {
   next();
 });
 
+const Backup = async () => {
+  await BackupToolkit.backup(
+    config.mongoDB.uri,
+    `../ChalleDeJeux_dumbs/dumb_${current_dumb}/`
+  );
+  current_dumb++;
+  if (current_dumb > maxBackup) current_dumb = 1;
+};
+
 const routes = require("./routes");
 app.use(routes);
 
@@ -23,6 +37,10 @@ mongoose
   .connect(config.mongoDB.uri)
   .then(() => {
     console.log("Connected to MongoDB");
+    task = cron.schedule("15 16 * * *", () => {
+      console.log("Starting Database Backup !");
+      Backup();
+    });
   })
   .catch((e) => console.error(e));
 
