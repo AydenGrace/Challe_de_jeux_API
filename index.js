@@ -28,10 +28,9 @@ const Backup = async () => {
     // `../ChalleDeJeux_dumbs/dumb_${date.getFullYear()}-${
     //   date.getMonth() + 1
     // }-${date.getDate()}_${date.getHours()}H${date.getMinutes()}/`
-    // `../dumbs/dumb_${date.getFullYear()}-${
-    //   date.getMonth() + 1
-    // }-${date.getDate()}_${date.getHours()}H${date.getMinutes()}/`
-    "./dumbs/"
+    `../dumbs/dumb_${date.getFullYear()}-${
+      date.getMonth() + 1
+    }-${date.getDate()}_${date.getHours()}H${date.getMinutes()}/`
   );
   current_dumb++;
   if (current_dumb > maxBackup) current_dumb = 1;
@@ -44,11 +43,11 @@ mongoose
   .connect(config.mongoDB.uri)
   .then(() => {
     console.log("Connected to MongoDB");
-    Backup();
-    task = cron.schedule("12 00 * * *", () => {
-      console.log("Starting Database Backup !");
-      Backup();
-    });
+    // Backup();
+    // task = cron.schedule("12 00 * * *", () => {
+    //   console.log("Starting Database Backup !");
+    //   Backup();
+    // });
   })
   .catch((e) => console.error(e));
 
