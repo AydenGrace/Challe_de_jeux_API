@@ -7,9 +7,6 @@ const cors = require("cors");
 const allowedOrigin = "https://challe-de-jeux-frontend.vercel.app";
 const { default: BackupToolkit } = require("mongodb-backup-toolkit");
 const cron = require("node-cron");
-let task;
-const maxBackup = 10;
-let current_dumb = 1;
 
 app.use(cors());
 app.use(express.json());
@@ -28,12 +25,10 @@ const Backup = async () => {
     // `../ChalleDeJeux_dumbs/dumb_${date.getFullYear()}-${
     //   date.getMonth() + 1
     // }-${date.getDate()}_${date.getHours()}H${date.getMinutes()}/`
-    `../dumbs/dumb_${date.getFullYear()}-${
+    `./dumbs/dumb_${date.getFullYear()}-${
       date.getMonth() + 1
     }-${date.getDate()}_${date.getHours()}H${date.getMinutes()}/`
   );
-  current_dumb++;
-  if (current_dumb > maxBackup) current_dumb = 1;
 };
 
 const routes = require("./routes");
