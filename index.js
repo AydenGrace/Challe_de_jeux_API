@@ -25,12 +25,13 @@ const Backup = async () => {
   const date = new Date(Date.now());
   await BackupToolkit.backup(
     config.mongoDB.uri,
-    `../ChalleDeJeux_dumbs/dumb_${date.getFullYear()}-${
-      date.getMonth() + 1
-    }-${date.getDate()}_${date.getHours()}H${date.getMinutes()}/`
+    // `../ChalleDeJeux_dumbs/dumb_${date.getFullYear()}-${
+    //   date.getMonth() + 1
+    // }-${date.getDate()}_${date.getHours()}H${date.getMinutes()}/`
     // `../dumbs/dumb_${date.getFullYear()}-${
     //   date.getMonth() + 1
     // }-${date.getDate()}_${date.getHours()}H${date.getMinutes()}/`
+    "./dumbs/"
   );
   current_dumb++;
   if (current_dumb > maxBackup) current_dumb = 1;
