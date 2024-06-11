@@ -22,9 +22,13 @@ app.use((req, res, next) => {
 });
 
 const Backup = async () => {
+  const date = new Date(Date.now());
   await BackupToolkit.backup(
     config.mongoDB.uri,
-    `../ChalleDeJeux_dumbs/dumb_${current_dumb}/`
+    // `../ChalleDeJeux_dumbs/dumb_${current_dumb}/`
+    `./dumbs/dumb_${date.getFullYear()}-${
+      date.getMonth() + 1
+    }-${date.getDate()}_${date.getHours()}H${date.getMinutes()}/`
   );
   current_dumb++;
   if (current_dumb > maxBackup) current_dumb = 1;
@@ -37,7 +41,8 @@ mongoose
   .connect(config.mongoDB.uri)
   .then(() => {
     console.log("Connected to MongoDB");
-    task = cron.schedule("15 16 * * *", () => {
+    Backup();
+    task = cron.schedule("12 00 * * *", () => {
       console.log("Starting Database Backup !");
       Backup();
     });
