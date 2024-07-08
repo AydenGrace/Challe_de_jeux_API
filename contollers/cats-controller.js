@@ -59,9 +59,9 @@ const updateCat = async (req, res) => {
 };
 
 const findCat = async (req, res) => {
-  console.log(req);
+  console.log(req.body);
   const { _id } = req.body;
-  Cats.find({ _id })
+  Cats.findOne({ _id })
     .populate("pedigree")
     .populate("coat")
     .populate("diseases")

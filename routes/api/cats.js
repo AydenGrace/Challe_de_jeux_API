@@ -18,6 +18,6 @@ router.delete("/delete", deleteCat);
 
 router.patch("/update", updateCat);
 
-router.get("/find", findCat);
+router.post("/find", findCat);
 
 module.exports = router;

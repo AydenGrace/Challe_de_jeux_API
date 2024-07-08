@@ -4,8 +4,8 @@ const PORT = process.env.PORT || 5000;
 const mongoose = require("mongoose");
 const config = require("./database/config");
 const cors = require("cors");
-const allowedOrigin = "https://challe-de-jeux-frontend.vercel.app";
-// const allowedOrigin = "http://localhost:5173";
+// const allowedOrigin = "https://challe-de-jeux-frontend.vercel.app";
+const allowedOrigin = "http://localhost:5173";
 const { default: BackupToolkit } = require("mongodb-backup-toolkit");
 const cron = require("node-cron");
 
