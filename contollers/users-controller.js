@@ -1,6 +1,7 @@
 const User = require("../models/user/users.schema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const {
   sendConfirmationEmail,
   sendValidationAccount,
@@ -13,6 +14,7 @@ const createTokenEmail = (email) => {
 };
 
 const createTokenLogin = (_id) => {
+  // console.log(process.env.SECRET);
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "30m" });
 };
 
@@ -93,6 +95,7 @@ const verifyMail = async (req, res) => {
 
 const Login = async (req, res) => {
   const { email, password } = req.body;
+  console.log("LOGIN");
   try {
     const user = await User.findOne({ email }).populate("role");
     if (user) {
@@ -105,6 +108,7 @@ const Login = async (req, res) => {
       }
       const match = await bcrypt.compare(password, user.password);
       if (match) {
+        console.log(user);
         const token = createTokenLogin(user._id);
         res.status(200).json({ user, token, status: 200 });
       } else {
