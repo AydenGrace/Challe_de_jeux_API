@@ -1,14 +1,18 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 const mongoose = require("mongoose");
 const config = require("./database/config");
 const cors = require("cors");
 // const allowedOrigin = "https://challe-de-jeux-frontend.vercel.app";
-const allowedOrigin = "http://localhost:5173";
+const allowedOrigin =
+  process.env.IS_DEV === "true"
+    ? "http://localhost:5173"
+    : "https://challe-de-jeux-frontend.vercel.app";
 const { default: BackupToolkit } = require("mongodb-backup-toolkit");
 const cron = require("node-cron");
-
+console.log(allowedOrigin);
 app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
