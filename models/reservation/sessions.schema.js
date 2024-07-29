@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 
 const sessionsSchema = schema({
   room: { type: schema.Types.ObjectId, required: true, ref: "rooms" },
-  Date: { type: Date, required: true },
-  IsAvalaible: Boolean,
+  date: { type: Date, required: true },
+  isAvalaible: { type: Boolean, default: true },
 });
 
 module.exports = mongoose.model("sessions", sessionsSchema);
