@@ -26,6 +26,11 @@ const Apis = [
     url: "/sessions",
     name: "Sessions",
   },
+  {
+    require: require("./reservation"),
+    url: "/reservations",
+    name: "Reservations",
+  },
 ];
 
 Apis.map((item) => {

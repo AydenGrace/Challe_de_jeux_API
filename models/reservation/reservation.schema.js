@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const reservationSchema = schema(
   {
     email: { type: String, required: true },
+    name: { type: String, required: true },
     phone: { type: String, required: true },
     price: { type: Number, required: true },
     nbPlayers: { type: Number, required: true },

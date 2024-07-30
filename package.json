@@ -24,7 +24,8 @@
     "mongodb-backup-toolkit": "^1.0.8",
     "mongoose": "^8.3.5",
     "node-cron": "^3.0.3",
-    "nodemailer": "^6.9.13"
+    "nodemailer": "^6.9.13",
+    "stripe": "^16.5.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
