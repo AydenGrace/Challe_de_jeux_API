@@ -68,10 +68,58 @@ const sendChangePwd = async (email, token) => {
   await transporter.sendMail(mailOptions);
 };
 
+const sendBookingValidation = async (email, reservation, session) => {
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Demande de réservation validée",
+    html: `<p>Bonjour,<br/>Votre demande de réservation pour la salle <strong>${
+      session.room.name
+    } le ${new Date(session.date).getDate()}/${
+      new Date(session.date).getMonth() + 1
+    }/${new Date(session.date).getFullYear()} à ${new Date(
+      session.date
+    ).getHours()}H${new Date(
+      session.date
+    ).getMinutes()}</strong> à été validé.<br/><br/>Composition de l'équipe : ${
+      reservation.nbPlayers
+    } Joueurs pour un total de ${
+      reservation.price
+    }€.<br/><br/>Merci de vous présenter à l'accueil 15min avant le début de votre session.</p>`,
+  };
+
+  await transporter.sendMail(mailOptions);
+};
+
+const sendPayValidation = async (email, reservation, session) => {
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Payement effectué",
+    html: `<p>Bonjour,<br/>Votre payement pour la réservation de la salle <strong>${
+      session.room.name
+    } le ${new Date(session.date).getDate()}/${
+      new Date(session.date).getMonth() + 1
+    }/${new Date(session.date).getFullYear()} à ${new Date(
+      session.date
+    ).getHours()}H${new Date(
+      session.date
+    ).getMinutes()}</strong> à bien été effectué par carte bancaire.<br/><br/>Composition de l'équipe : ${
+      reservation.nbPlayers
+    } Joueurs pour un total de ${
+      reservation.price
+    }€.<br/><br/>En cas de problème, merci de nous le signaler par appel téléphone ou en remplissant notre formulaire de contact.<br/><br/>En vous souhaitant une Miaou Journée !</p>`,
+  };
+
+  await transporter.sendMail(mailOptions);
+};
+
 module.exports = {
   sendConfirmationEmail,
   sendValidationAccount,
   sendInvalideToken,
   sendChangePwd,
   sendContactForm,
+  sendBookingValidation,
+  sendPayValidation,
 };

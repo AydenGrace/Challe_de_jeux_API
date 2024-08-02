@@ -1,11 +1,27 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+const { sendBookingValidation } = require("../email/email");
 const Reservation = require("../models/reservation/reservation.schema");
 const Sessions = require("../models/reservation/sessions.schema");
 const Room = require("../models/rooms/rooms.schema");
 
 const getAll = async (req, res) => {
   Reservation.find()
+    .populate("session")
+    .populate("reductions")
+    .populate("user")
+    .then((reserv) => {
+      res.status(200).json(reserv);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.status(500).send("Get Error");
+    });
+};
+
+const getOneById = async (req, res) => {
+  const { _id } = req.body;
+  Reservation.findOne({ _id })
     .populate("session")
     .populate("reductions")
     .populate("user")
@@ -53,7 +69,9 @@ const createAReservation = async (req, res) => {
       res.status(500).json({ error: "A booking already exist" });
       return;
     }
-    const ThisSession = await Sessions.findOne({ _id: sessionId });
+    const ThisSession = await Sessions.findOne({ _id: sessionId }).populate(
+      "room"
+    );
     //THIS SESSION IS NOT AVAILABLE TO RESERVATION
     if (!ThisSession.isAvalaible) {
       console.log("This session can't be booked");
@@ -78,8 +96,15 @@ const createAReservation = async (req, res) => {
       { _id: ThisSession._id },
       { $set: { isAvalaible: false } }
     );
-    console.log(sessionToUpdate);
-    const CartSessionId = await cart(Total, ProductId, res);
+
+    await sendBookingValidation(email, thisReservation, ThisSession);
+
+    const CartSessionId = await cart(
+      thisReservation._id,
+      Total,
+      ProductId,
+      res
+    );
     console.log("Stripe session : ", CartSessionId);
     if (CartSessionId) res.json({ CartSessionId });
     else res.status(400).json({ error: "An unknowed error has occured" });
@@ -89,7 +114,7 @@ const createAReservation = async (req, res) => {
   }
 };
 
-const cart = async (price, productId, res) => {
+const cart = async (reservationId, price, productId, res) => {
   try {
     const RoomProduct = await Room.findOne({ _id: productId });
     if (!RoomProduct) {
@@ -112,8 +137,8 @@ const cart = async (price, productId, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.ALLOWED_URL}/booking_success`,
-      cancel_url: `${process.env.ALLOWED_URL}/booking`,
+      success_url: `${process.env.ALLOWED_URL}/booking_success/${reservationId}`,
+      cancel_url: `${process.env.ALLOWED_URL}/booking_failed/${reservationId}`,
     });
     return session.id;
   } catch (e) {
@@ -122,4 +147,4 @@ const cart = async (price, productId, res) => {
   }
 };
 
-module.exports = { getAll, createAReservation };
+module.exports = { getAll, createAReservation, getOneById };
