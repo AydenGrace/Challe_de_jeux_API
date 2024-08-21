@@ -14,7 +14,7 @@ const errorSchema = schema(
     user: [{ type: schema.Types.ObjectId, ref: "users" }],
   },
   {
-    Timestamp: true,
+    timestamp: true,
   }
 );
 

@@ -13,7 +13,7 @@ const ratingSchema = schema(
     stars: { type: Number, required: true },
     comment: { type: String },
   },
-  { Timestamp: true }
+  { timestamp: true }
 );
 
 module.exports = mongoose.model("reservation_rating", ratingSchema);

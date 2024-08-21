@@ -10,7 +10,7 @@ const reductionSchema = schema(
     code: { type: String, required: true, unique: true },
   },
   {
-    Timestamp: true,
+    timestamp: true,
   }
 );
 
