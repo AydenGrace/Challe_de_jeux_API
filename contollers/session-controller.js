@@ -61,6 +61,97 @@ const addSession = async (req, res) => {
     });
 };
 
+const VerifyAndSaveSession = async (room, date, res) => {
+  const isSessionAlreadyExist = await Session.findOne({
+    room: room,
+    date: date,
+  });
+  if (!isSessionAlreadyExist) {
+    const newSession = await new Session({
+      room: room,
+      date: date,
+    });
+    await newSession
+      .save()
+      .then(() => {
+        console.log("Template Session saved");
+      })
+      .catch((e) => {
+        // console.log(e.message);
+        res.status(400).json({ message: "Error : Template Session not saved" });
+        return;
+      });
+  }
+};
+
+const addSessionTemplate = async (req, res) => {
+  console.log(req.body);
+  const { room, template, dateFrom, dateTo } = req.body;
+
+  const isRoomExist = await Room.find({ _id: room }).populate("tags");
+
+  if (!isRoomExist) {
+    res.status(400).json({ message: "Room not found" });
+    return;
+  }
+  const Date_To = new Date(dateTo);
+
+  for (
+    let Date_Current = new Date(dateFrom);
+    Date_Current <= Date_To;
+    Date_Current.setDate(Date_Current.getDate() + 1)
+  ) {
+    console.log("DATE", Date_Current);
+    let DayRef;
+    switch (Date_Current.getDay()) {
+      case 0:
+        DayRef = template.sunday;
+        break;
+      case 1:
+        DayRef = template.monday;
+        break;
+      case 2:
+        DayRef = template.tuesday;
+        break;
+      case 3:
+        DayRef = template.wednesday;
+        break;
+      case 4:
+        DayRef = template.thursday;
+        break;
+      case 5:
+        DayRef = template.friday;
+        break;
+      case 6:
+        DayRef = template.saturday;
+        break;
+      default:
+        res.status(400).json({ error: "Date Error" });
+        return;
+    }
+    if (!DayRef) continue;
+    DayRef.map((sessionTime) => {
+      console.log(sessionTime);
+      VerifyAndSaveSession(
+        room,
+        new Date(
+          Date.UTC(
+            Date_Current.getFullYear(),
+            Date_Current.getMonth(),
+            Date_Current.getDate(),
+            new Date(sessionTime).getHours(),
+            new Date(sessionTime).getMinutes(),
+            0,
+            0
+          )
+        ),
+        res
+      );
+    });
+  }
+  res.status(200).json({ message: "template saved" });
+};
+
 const getDaySessions = async (req, res) => {
   // console.log(req.body);
   const { room, date } = req.body;
@@ -123,8 +214,7 @@ const getDaySessions = async (req, res) => {
           `${tomorrow_year_string}-${tomorrow_month_string}-${tomorrow_string}T00:00:00.000Z`
         ),
       },
-    });
-    // console.log(sessionsFind);
+    }).sort({ date: 1 });
     res.json(sessionsFind);
   } catch (e) {
     console.log(e.message);
@@ -132,4 +222,10 @@ const getDaySessions = async (req, res) => {
   }
 };
 
-module.exports = { getAll, addSession, getDaySessions, getOne };
+module.exports = {
+  getAll,
+  addSession,
+  getDaySessions,
+  getOne,
+  addSessionTemplate,
+};
