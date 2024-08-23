@@ -155,11 +155,48 @@ const addSessionTemplate = async (req, res) => {
 const getDaySessions = async (req, res) => {
   // console.log(req.body);
   const { room, date } = req.body;
-  let month_string,
-    day_string,
-    tomorrow_month_string,
-    tomorrow_year_string,
-    tomorrow_string;
+  const sessionsToFind = await getSessionsOfARoom(room, date);
+  res.json(sessionsToFind);
+};
+
+const Togglelock = async (room, date) => {
+  const isRoomExist = await Room.find({ _id: room });
+  if (!isRoomExist) {
+    console.log("Error : Room not found");
+    return false;
+  }
+  console.log("DATE", new Date(date));
+
+  const isSessionAlreadyExist = await Session.findOneAndUpdate(
+    {
+      room: room,
+      date: new Date(date),
+    },
+    [{ $set: { isAvalaible: { $eq: [false, "$isAvalaible"] } } }]
+  );
+  console.log(isSessionAlreadyExist);
+
+  if (!isSessionAlreadyExist) {
+    console.log("Error : Session not found");
+
+    return false;
+  }
+  console.log("Session toggled");
+  return true;
+};
+
+const ToggleSessions = async (req, res) => {
+  const { sessions } = req.body;
+
+  sessions.map((session) => {
+    Togglelock(session.room, session.date);
+  });
+  res.json({ message: "Sessions toggled" });
+};
+
+const getSessionsOfARoom = async (room, date) => {
+  console.log(date);
+
   const isRoomExist = await Room.find({ _id: room }).populate("tags");
   //ROOM DOESN'T EXIST
   if (!isRoomExist) {
@@ -194,13 +231,6 @@ const getDaySessions = async (req, res) => {
     tomorrow_string = `${tomorrow.getDate()}`;
   }
 
-  // console.log(
-  //   new Date(date).getFullYear() + "/" + month_string + "/" + day_string
-  // );
-  // console.log(
-  //   tomorrow_year_string + "/" + tomorrow_month_string + "/" + tomorrow_string
-  // );
-
   try {
     const sessionsFind = await Session.find({
       room: room,
@@ -215,10 +245,38 @@ const getDaySessions = async (req, res) => {
         ),
       },
     }).sort({ date: 1 });
-    res.json(sessionsFind);
+    console.log(sessionsFind);
+
+    return sessionsFind;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
+};
+
+const getAllofDay = async (req, res) => {
+  const { date } = req.body;
+  let tempArray = [];
+  try {
+    const rooms = await Room.find();
+    // console.log(rooms);
+    if (!rooms) {
+      res.json([]);
+      return;
+    }
+
+    for (let i = 0; i < rooms.length; i++) {
+      tempArray.push({
+        roomId: rooms[i]._id,
+        roomName: rooms[i].name,
+        sessions: await getSessionsOfARoom(rooms[i]._id, date),
+      });
+    }
+    res.json(tempArray);
   } catch (e) {
     console.log(e.message);
-    res.status(400).json({ message: e.message });
+
+    res.status(400).json({ error: e.message });
   }
 };
 
@@ -228,4 +286,6 @@ module.exports = {
   getDaySessions,
   getOne,
   addSessionTemplate,
+  getAllofDay,
+  ToggleSessions,
 };
