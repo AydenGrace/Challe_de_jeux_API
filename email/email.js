@@ -95,8 +95,8 @@ const sendPayValidation = async (email, reservation, session) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
-    subject: "Payement effectué",
-    html: `<p>Bonjour,<br/>Votre payement pour la réservation de la salle <strong>${
+    subject: "Paiement effectué",
+    html: `<p>Bonjour,<br/>Votre paiement pour la réservation de la salle <strong>${
       session.room.name
     } le ${new Date(session.date).getDate()}/${
       new Date(session.date).getMonth() + 1

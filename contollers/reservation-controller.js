@@ -147,66 +147,74 @@ const cart = async (reservationId, price, productId, res) => {
   }
 };
 
-const cancel = async (req, res) =>  {
-  const {_id} = req.body;
-  console.log("id",_id);
+const cancel = async (req, res) => {
+  const { _id } = req.body;
+  console.log("id", _id);
   try {
-    const isExist = await Reservation.findOne({_id});
-    if(!isExist){
+    const isExist = await Reservation.findOne({ _id });
+    if (!isExist) {
       console.log("Booking not found");
-      res.status(400).json({error:"Booking not found"});
+      res.status(400).json({ error: "Booking not found" });
       return;
     }
     console.log(isExist);
-    
+
     const sessionToUpdate = await Sessions.findOneAndUpdate(
       { _id: isExist.session },
       { $set: { isAvalaible: true } }
     );
     console.log(sessionToUpdate);
-    
-    await Reservation.findOneAndDelete({_id});
+
+    await Reservation.findOneAndDelete({ _id });
     res.json({ message: "Booking canceled" });
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: error.message });
   }
-  
-}
+};
 
-const validate = async (req, res) =>  {
-  const {_id} = req.body;
-  console.log("id",_id);
+const validate = async (req, res) => {
+  const { _id } = req.body;
+  console.log("id", _id);
   try {
-    const isExist = await Reservation.findOneAndUpdate({_id},
-      { $set: { isPayed: true } }).populate({path:"session",populate:{path:"room"}});
-    if(!isExist){
+    const isExist = await Reservation.findOneAndUpdate(
+      { _id },
+      { $set: { isPayed: true } }
+    ).populate({ path: "session", populate: { path: "room" } });
+    if (!isExist) {
       console.log("Booking not found");
-      res.status(400).json({error:"Booking not found"});
+      res.status(400).json({ error: "Booking not found" });
       return;
     }
     console.log(isExist);
-    sendPayValidation(isExist.email,isExist,isExist.session);
+    sendPayValidation(isExist.email, isExist, isExist.session);
     res.json({ message: "Booking payed" });
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: error.message });
   }
-  
-}
+};
 
-const getAllFromUserId = async (req, res) =>  {
-  const {_id} = req.body;
-  console.log("id",_id);
+const getAllFromUserId = async (req, res) => {
+  const { _id } = req.body;
+  console.log("id", _id);
   try {
-    const options = { sort: [['session.date', 'desc' ]] };
-    const reservations = await Reservation.find({user:_id}).populate({path:"session",populate:{path:"room"}}).sort({session:"desc"});
+    const options = { sort: [["session.date", "desc"]] };
+    const reservations = await Reservation.find({ user: _id })
+      .populate({ path: "session", populate: { path: "room" } })
+      .sort({ session: "desc" });
     res.json(reservations);
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: error.message });
   }
-  
-}
+};
 
-module.exports = { getAll, createAReservation, getOneById,cancel,validate,getAllFromUserId };
+module.exports = {
+  getAll,
+  createAReservation,
+  getOneById,
+  cancel,
+  validate,
+  getAllFromUserId,
+};

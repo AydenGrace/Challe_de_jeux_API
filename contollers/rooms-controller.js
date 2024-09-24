@@ -63,4 +63,16 @@ const addTag = async (req, res) => {
       res.status(400).json({ message: "Error : Room Tag not saved" });
     });
 };
-module.exports = { getAll, addRoom, addTag };
+
+const getAllTags = async (req, res) => {
+  RoomTags.find()
+    .then((tags) => {
+      res.status(200).json(tags);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.status(500).send("Get Error");
+    });
+};
+
+module.exports = { getAll, addRoom, addTag, getAllTags };
