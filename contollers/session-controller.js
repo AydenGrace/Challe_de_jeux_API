@@ -85,11 +85,12 @@ const VerifyAndSaveSession = async (room, date, res) => {
 };
 
 const addSessionTemplate = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { room, template, dateFrom, dateTo } = req.body;
 
-  const isRoomExist = await Room.find({ _id: room }).populate("tags");
-
+  const isRoomExist = await Room.find({ _id: room });
+  console.log(isRoomExist);
+  
   if (!isRoomExist) {
     res.status(400).json({ message: "Room not found" });
     return;

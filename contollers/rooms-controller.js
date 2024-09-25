@@ -38,7 +38,7 @@ const addRoom = async (req, res) => {
       res.status(200).json({ message: "Room saved" });
     })
     .catch(() => {
-      res.status(400).json({ message: "Error : Room not saved" });
+      res.status(400).json({ error: "Error : Room not saved" });
     });
 };
 
